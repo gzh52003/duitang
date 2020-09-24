@@ -1,6 +1,8 @@
 import React from 'react';
 // import ReactDOM from 'react-dom';
-import { Form, Input, Button, Checkbox, message } from 'antd';
+import "../css/Login.css"
+import sha256 from 'crypto-js/sha256';
+import { Form, Input, Button, Checkbox, message, Row, Col } from 'antd';
 
 class Login extends React.PureComponent {
 
@@ -21,12 +23,18 @@ class Login extends React.PureComponent {
             },
         };
 
+        // const yan = {
+        //     wrapperCol: {
+        //         offset: 5,
+        //         span: 11,
+        //     },
+        // }
+
         const onFinish = (values) => {
-            console.log('Success:', values);
-            console.log(this.props)
             let $this = this;
             if (values.password.length > 5 && values.username.length >= 3) {
-
+                let pass = sha256(values.password).toString();
+                console.log(pass)
                 if (values.remember) {
 
                     $this.props.history.push({ pathname: '/public', state: { name: values.username } })
@@ -35,7 +43,7 @@ class Login extends React.PureComponent {
         };
 
         const onFinishFailed = () => {
-            message.error('用户名或密码不能为空');
+            message.error('用户名、密码和验证码不能为空');
         };
 
         function mess() {
@@ -58,7 +66,7 @@ class Login extends React.PureComponent {
                     name="username"
                     rules={[{ required: true, message: 'Please input your username!' }]}
                 >
-                    <Input />
+                    <Input allowClear maxLength={12} />
                 </Form.Item>
 
                 <Form.Item
@@ -66,8 +74,24 @@ class Login extends React.PureComponent {
                     name="password"
                     rules={[{ required: true, message: 'Please input your password!' }]}
                 >
-                    <Input.Password />
+                    <Input.Password allowClear />
                 </Form.Item>
+
+                <Row>
+                    <Col offset={3} span={11} >
+                        <Form.Item
+                            label="验证码"
+
+                            name="check"
+                            rules={[{ required: true, message: '输入验证码啊混蛋ε＝ε＝ε＝(#>д<)ﾉ' }]}
+                        >
+                            <Input allowClear maxLength={4} />
+
+                        </Form.Item>
+                    </Col>
+                    <Col> <span>我是验证码</span>
+                    </Col>
+                </Row>
 
                 <Form.Item {...tailLayout} name="remember" valuePropName="checked" >
                     <Checkbox onChange={mess.bind(this)}>7天免登录</Checkbox>
@@ -78,7 +102,9 @@ class Login extends React.PureComponent {
                         登录
               </Button>
                 </Form.Item>
-            </Form>
+
+
+            </Form >
         )
     }
 }

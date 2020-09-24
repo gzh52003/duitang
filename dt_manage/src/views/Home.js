@@ -83,6 +83,10 @@ class Home extends React.PureComponent {
         return option
     }
 
+
+
+
+
     render() {
         return (
             <div>
@@ -97,7 +101,9 @@ class Home extends React.PureComponent {
                             <ReactEcharts option={this.getOption1()} theme="Imooc" style={{ height: '400px' }} />
                         </Card>
                     </Col>
+
                 </Row>
+
             </div >
         )
     }
