@@ -61,12 +61,16 @@ class App extends React.PureComponent {
   }
   componentWillMount(){
     this.props.dispatch({type:'tabbar',show:false})
-    
+    // console.log(this.props.location.pathname,'0000');
+    this.setState({
+      selectedTab:this.props.location.pathname
+    })
   }
   
  
   render() {
     const { hidden } = this.props
+    
     return (
       <>
         <Switch>
