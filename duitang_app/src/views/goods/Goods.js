@@ -1,7 +1,6 @@
 import React from 'react';
-
-
 import { NavBar, Icon,Carousel, WingBlank,Grid } from 'antd-mobile';
+
 const goodsMenu=[{
     icon:'/img/category_flower1.png',
     text:'鲜花',
@@ -38,7 +37,11 @@ class Goods extends React.Component {
         console.log(this.props,el,idx);
         this.props.history.push('/goods/goodslist/'+el.text+idx);
     }
-    
+    componentDidMount(){
+        const time =  new Date().toLocaleString()
+        console.log(time);
+        
+    }
     render() {
         return (
             <>
