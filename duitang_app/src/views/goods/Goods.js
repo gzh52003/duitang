@@ -2,6 +2,7 @@ import React from 'react';
 
 
 import { NavBar, Icon,Carousel, WingBlank,Grid } from 'antd-mobile';
+import axios from 'axios';
 const goodsMenu=[{
     icon:'/img/category_flower1.png',
     text:'鲜花',
@@ -41,7 +42,6 @@ class Goods extends React.Component {
     componentDidMount(){
         const time =  new Date().toLocaleString()
         console.log(time);
-        
     }
     render() {
         return (
