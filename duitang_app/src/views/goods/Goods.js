@@ -1,6 +1,7 @@
 import React from 'react';
-import { NavBar, Icon,Carousel, WingBlank,Grid } from 'antd-mobile';
 
+
+import { NavBar, Icon,Carousel, WingBlank,Grid } from 'antd-mobile';
 const goodsMenu=[{
     icon:'/img/category_flower1.png',
     text:'鲜花',
