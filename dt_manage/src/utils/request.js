@@ -3,11 +3,12 @@
  */
 
 import axios from 'axios';
-// import store from '../store'
-// import { message } from 'antd';
+import store from '../store'
+import { message } from 'antd';
+const baseurl = process.env.Node_ENV === "production" ? 'http://120.24.63.27:2006/api' : 'http://10.3.138.24:2006/api'
 
 const request = axios.create({
-    baseURL: 'http://10.3.138.24:2006/api',
+    baseURL: baseurl,
     withCredentials: true
 })
 

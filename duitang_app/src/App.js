@@ -51,22 +51,26 @@ class App extends React.PureComponent {
     }],
 
   }
-  goto = (path) => {
+  goto=(path)=>{
     console.log(this.props);
-    this.props.history.push(path);
+    this.props.history.push(path); 
+      this.setState({
+        selectedTab: path,
+      });
+    
+  }
+  componentWillMount(){
+    this.props.dispatch({type:'tabbar',show:false})
+    // console.log(this.props.location.pathname,'0000');
     this.setState({
-      selectedTab: path,
-    });
-
+      selectedTab:this.props.location.pathname
+    })
   }
-  componentWillMount() {
-    this.props.dispatch({ type: 'tabbar', show: false })
-
-  }
-
-
+  
+ 
   render() {
     const { hidden } = this.props
+    
     return (
       <>
         <Switch>
@@ -76,43 +80,43 @@ class App extends React.PureComponent {
           <Route path='/login' component={Login} />
           <Route path="/goods" component={Goodindex} />
           <Route path='/reg' component={Reg} />
-          <Route path='/notfound' render={() => <div>404</div>} />
+          <Route path='/notfound' render={()=><div>404</div>} />
           <Redirect from='/' to='/home' exact />
           <Redirect to='/notfound' />
         </Switch>
 
-        <div style={{ position: 'fixed', bottom: 0, width: "100vw" }}>
-          <TabBar
+        <div style={{position:'fixed',bottom:0,width:"100vw"}}>
+          <TabBar 
             unselectedTintColor="#949494"
             tintColor="#f25555"
             barTintColor="#fff"
             hidden={hidden}
-            tabBarPosition='bottom'
-
+            tabBarPosition='bottom'            
+            
           >
 
             {
-              this.state.tabbarMenu.map(item => <TabBar.Item title={item.text}
-                key={item.path}
-                icon={<i className={`iconfont ${item.icon}`}></i>}
-                onPress={this.goto.bind(null, item.path)}
-                selected={this.state.selectedTab === item.path}
-                selectedIcon={<i style={{ color: '#f25555' }} className={`iconfont ${item.icon}`}></i>}
+              this.state.tabbarMenu.map(item=><TabBar.Item title={item.text}
+              key={item.path}
+              icon={<i className={`iconfont ${item.icon}`}></i>}
+              onPress={this.goto.bind(null,item.path)} 
+              selected={this.state.selectedTab === item.path}
+              selectedIcon={<i style={{color:'#f25555'}} className={`iconfont ${item.icon}`}></i>}
               ></TabBar.Item>)
             }
-          </TabBar>
+            </TabBar>
         </div>
       </>
     )
   }
 
 
-
+  
 }
-const mapStateToProps = function (state) {
-  return {
-    hidden: state.hidden,
-  }
+const mapStateToProps = function(state){
+    return {
+      hidden: state.hidden,
+    }
 }
 App = connect(mapStateToProps)(App)
 export default App;

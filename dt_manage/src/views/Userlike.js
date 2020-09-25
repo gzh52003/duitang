@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Table } from 'antd';
 import request from "../utils/request.js"
 
+import request from '../utils/request'
 
 const columns = [
     {
@@ -99,7 +100,7 @@ function Userlike() {
 
         < div style={{}}>
             <>
-                <Table columns={columns} dataSource={data} pagination={{
+                {/* <Table columns={columns} dataSource={data} pagination={{
                     showSizeChanger,
                     onShowSizeChange,
                     showQuickJumper
@@ -107,7 +108,7 @@ function Userlike() {
 
                 }}>
 
-                </Table>
+                </Table> */}
 
             </>,
         </div >

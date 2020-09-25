@@ -8,7 +8,7 @@
 #tab-bar .demo-preview-item .am-tab-bar {
   background-color: white;
 }
-div,p,ul,li{
+div,p,ul,li,h1,h2,h3,h4,h5,h6{
   margin: 0;
   padding: 0;
 }
@@ -18,9 +18,14 @@ div,p,ul,li{
   padding: 0 !important;
 }
 .am-list-body{
-  height: 100px;
+  height: 100%;
   padding: 10px 0;
+  padding-right: 10px;
   box-sizing: border-box;
+
+}
+.am-list-item{
+  margin-bottom: 20px;
 }
 .am-list-item .am-list-line-multiple{
   padding: 0 !important;
@@ -29,13 +34,19 @@ div,p,ul,li{
   width: 82px;
   height: 82px;
 }
-.am-list-body .am-list-item .am-list-line .am-list-content{
+.am-list .am-list-body .am-list-item .am-list-line .am-list-content{
   font-size: 14px;
+  white-space:normal;
+  /* display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-webkit: line ciamp 2;
+  overflow: hidden; */
+
 }
 .am-list-body .am-list-item .am-list-line .am-list-brief{
-  margin-top: 18px;
-  
+  margin-top: 10px;
+
 }
-.am-list-body .am-list-item .am-list-line .am-list-content{
-  white-space:wrap !important;
-}
+ .am-navbar .am-navbar-title{
+   font-size: 16px;
+ }
