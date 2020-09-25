@@ -10,10 +10,15 @@
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.6.4",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "crypto-js": "^4.0.0",
 =======
     "axios": "^0.20.0",
 >>>>>>> lin
+=======
+    "axios": "^0.20.0",
+    "crypto-js": "^4.0.0",
+>>>>>>> cxl
     "echarts": "^4.9.0",
     "echarts-for-react": "^2.0.16",
     "mapvgl": "^1.0.0-beta.76",

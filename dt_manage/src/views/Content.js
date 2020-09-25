@@ -1,212 +1,93 @@
-import React from 'react';
-import { Table, Button } from 'antd';
+import React,{useEffect, useState,useCallback} from 'react';
+import { Table, Button,Space,Popconfirm } from 'antd';
 import "../css/Content.css"
-
-
-const data = [
-    {
-        key: '1',
-        name: 'John Brown',
-        phone: "asdasdassssssssssssssssssssssssssssssdaasssssssssssssssssssssssssasssssssssssssssssssssssssasssssssssssssssssssssssssassssssssssssssssssssssssssdas",
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '7',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '8',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '9',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '10',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '11',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '12',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '13',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '14',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-
-    {
-        key: '15',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '16',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '17',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '18',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '19',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        sex: "msale",
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        phone: "1234568912",
-        age: 32,
-        sex: "male",
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
-
-const columns = [
-    {
-        title: '用户名',
-        dataIndex: 'name',
-        key: 'name',
-        render: text => <span>{text}</span>,
-    },
-    {
-        title: '发布内容',
-        dataIndex: 'phone',
-        key: 'phone',
-        // ellipsis: true,
-        className: "content_row",
-        rend: text => {
-            return (
-                <p>{text}</p>
-            )
-        }
-    },
-    {
-        title: '发布时间',
-        dataIndex: 'sex',
-        key: 'sex',
-    },
-    {
-        title: '浏览记录',
-        dataIndex: 'address',
-        key: 'address',
-    },
-    {
-        title: '点赞人数',
-        dataIndex: 'address',
-        key: 'address',
-    },
-    {
-        title: '操作',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: text => <> {
-            text.map(ind => {
-                if (ind === "nice") {
-                    return (
-
-                        <Button key={ind + 1} type="primary" danger>{ind}</Button>
-                        // <Button key={ind + 1} onClick={}>{ind}</Button>
-                    )
-                } else {
-                    return (
-                        <Button key={ind + 1} style={{ background: "#58bc58" }}>{ind}</Button>
-                    )
-                }
-            })
-        }
-        </>
-    }
-]
-
-const showQuickJumper = () => {
-    console.log("asd")
-}
-
-const onShowSizeChange = (current, size) => {
-    console.log(current, size)
-}
-
-const showSizeChanger = () => {
-
-}
-
-
+import request from '../utils/request'
+import { CheckOutlined,DeleteOutlined } from '@ant-design/icons';
 
 
 function Content(props) {
-    console.log('home.props=', props)
+    const [data,setData] = useState([])
+    // console.log('home.props=', props)
+
+    // 数据审核通过
+    const shujuok = useCallback(function(event){
+        console.log('数据审核通过',event.currentTarget.parentElement.parentElement.parentElement.parentElement.firstElementChild.innerHTML)
+
+    })
+
+    // 删除数据
+    const deleteshuju = useCallback(function(event){
+        console.log('删除数据',event.currentTarget.parentElement.parentElement.parentElement.parentElement.firstElementChild.innerHTML)
+    })
+
+    // 请求数据
+    useEffect( async ()=>{
+        const {data} = await request.get('/list/by_search',{page:1,size:10})
+        data.map((item)=>{
+          item.username = item.sender.username;
+          item.content = item.album.name
+        })
+        setData(data)
+        
+    },[])
 
 
+    
+const columns = [
+    {
+        title: '用户名id',
+        dataIndex: 'id',
+        key: 'id',
+        
+    },
+    {
+        title: '用户名',
+        dataIndex: 'username',
+        key: 'username',
+        
+    },
+    {
+        title: '发布内容',
+        dataIndex: 'content',
+        key: 'content',
+    },
+    {
+        title: '发布时间',
+        dataIndex: 'add_datetime',
+        key: 'add_datetime',
+    },
+    {
+        title: '浏览记录',
+        dataIndex: 'favorite_count',
+        key: 'favorite_count',
+        sorter: (a, b) => a.favorite_count - b.favorite_count,
+    },
+    {
+        title: '点赞人数',
+        dataIndex: 'like_count',
+        key: 'like_count',
+        sorter: (a, b) => a.like_count - b.like_count,
+    },
+    {
+        title: '内容审核',
+        key: 'action',
+        render: (text) => (
+          <Space size="middle">
+            <Button type="defalut" className="ok" shape="circle" icon={<CheckOutlined />}  size='middle' onClick={shujuok}/>
+            <Popconfirm title="Are you sure？" okText="Yes" cancelText="No">
+                <Button type="defalut" className="delete" shape="circle" icon={<DeleteOutlined />}  size='middle' danger onClick={deleteshuju}/>
+            </Popconfirm>
+          </Space>
+        ),
+    }
+]
     return (
         <div style={{}}>
             <>
                 <Table columns={columns} dataSource={data} pagination={{
-                    showSizeChanger,
-                    onShowSizeChange,
-                    showQuickJumper
+                    // showSizeChanger,
+                    // onShowSizeChange,
+                    // showQuickJumper
                     //  showTotal: total
 
                 }}>

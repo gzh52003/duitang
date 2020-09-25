@@ -42,6 +42,11 @@ class Goods extends React.Component {
     componentDidMount(){
         const time =  new Date().toLocaleString()
         console.log(time);
+<<<<<<< HEAD
+=======
+        const data = axios.get('http://10.3.138.24:2006/api/user/batch')
+        console.log(data);
+>>>>>>> cxl
     }
     render() {
         return (
