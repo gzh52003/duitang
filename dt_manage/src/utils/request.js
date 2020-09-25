@@ -5,31 +5,31 @@
 import axios from 'axios';
 import store from '../store'
 import { message } from 'antd';
-
+    const url = process.env.NODE_ENV === 'production' ? 'http://120.24.63.27:2006/api' : 'http://localhost:2006/api'
 const request = axios.create({
-    baseURL: 'http://120.76.247.5:2001/api',
+    baseURL: url,
     withCredentials: true
 })
 
 // 请求拦截：在请求发出去之前进行的操作
 // 应用：统一发送固定参数，loading
 // 
-request.interceptors.request.use(function (config) {
-    const state = store.getState();
-    config.headers.authorization = state.user.Authorization;
+// request.interceptors.request.use(function (config) {
+//     const state = store.getState();
+//     config.headers.authorization = state.user.Authorization;
 
-    message.loading('努力加载中....');
-    return config;
-}, function (error) {
-    return Promise.reject(error)
-})
+//     message.loading('努力加载中....');
+//     return config;
+// }, function (error) {
+//     return Promise.reject(error)
+// })
 // 响应拦截：数据返回前进行的操作
 // 应用：格式化数据，关闭loading
-request.interceptors.response.use(function (response) {
-    return response
-}, function (error) {
-    return Promise.reject(error)
-})
+// request.interceptors.response.use(function (response) {
+//     return response
+// }, function (error) {
+//     return Promise.reject(error)
+// })
 
 
 export async function get(url, data, config = {}) {
