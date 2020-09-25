@@ -5,6 +5,7 @@ import { Route, Redirect, Switch, withRouter } from 'react-router-dom'
 // import { logout } from './store/actions/user'
 // import { connect } from 'react-redux'
 import './App.css';
+
 // import { Row, Col, Button } from 'antd';
 
 const Login = lazy(() => import("./views/Login"));
@@ -48,8 +49,6 @@ class App extends React.PureComponent {
 
   render() {
     // const { anniu } = this.state;
-    // // console.log(this.props)
-    // // const { value, onIncreaseClick } = this.props
     return (
       <div style={{ height: "100vh" }}>
         <Suspense fallback={<div>loading...</div>}>
@@ -64,6 +63,6 @@ class App extends React.PureComponent {
   }
 }
 
-App = withRouter(App);
 
+App = withRouter(App);
 export default App;
