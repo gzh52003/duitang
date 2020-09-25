@@ -1,128 +1,8 @@
-import React from 'react';
+import React,{userState,useEffect} from 'react';
 import { Table, Button } from 'antd';
 
+import request from '../utils/request'
 
-
-const data = [
-    {
-        key: '1',
-        name: 'John Brown',
-        phone: "asdasdassssssssssssssssssssssssssssssdaasssssssssssssssssssssssssasssssssssssssssssssssssssasssssssssssssssssssssssssassssssssssssssssssssssssssdas",
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '7',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '8',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '9',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '10',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '11',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '12',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '13',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '14',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-
-    {
-        key: '15',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '16',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '17',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '18',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '19',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        sex: "msale",
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        phone: "1234568912",
-        age: 32,
-        sex: "male",
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
 
 const columns = [
     {
@@ -194,13 +74,15 @@ const showSizeChanger = () => {
 }
 
 function Userlike(props) {
+    // const [data,setData] = userState([{}])
+
     console.log('home.props=', props)
 
 
     return (
         <div style={{}}>
             <>
-                <Table columns={columns} dataSource={data} pagination={{
+                {/* <Table columns={columns} dataSource={data} pagination={{
                     showSizeChanger,
                     onShowSizeChange,
                     showQuickJumper
@@ -208,7 +90,7 @@ function Userlike(props) {
 
                 }}>
 
-                </Table>
+                </Table> */}
 
             </>,
         </div >
