@@ -31,8 +31,13 @@ class Public extends React.PureComponent {
 
     // 路由跳转
     goto = (path) => {
-        console.log(this.props.history, path)
+        // console.log(this.props.history, path)
         this.props.history.push(path);
+    }
+
+
+    tuichu = () => {
+        this.props.history.push("/login");
     }
 
     // // 路由跳转
@@ -42,6 +47,7 @@ class Public extends React.PureComponent {
     // }
 
     componentWillMount() {
+        // console.log(localStorage.getItem("wuhu"))
         const { pathname } = this.props.location;
         let names = "";
         if (this.props.location.state) {
@@ -50,7 +56,7 @@ class Public extends React.PureComponent {
             names = localStorage.getItem("name")
         }
         // this.state.name = names
-        console.log(names)
+        // console.log(names)
         this.setState({
             address: pathname,
             name: names
@@ -60,6 +66,7 @@ class Public extends React.PureComponent {
     }
     componentWillUnmount() {
         console.log(this.state.name)
+        // console.log(localStorage.getItem("wuhu"))
 
     }
 
@@ -94,7 +101,7 @@ class Public extends React.PureComponent {
                     <Col span={12}>
                         <div style={{ float: "right", padding: "0 10% 0 0 " }} >
                             <span style={{ cursor: "pointer", color: "pink", fontSize: "20px", margin: "0 10px" }}>{this.state.name}</span>
-                            <Button onClick={this.goto.bind(this, "/login")} style={{}}>
+                            <Button onClick={this.tuichu.bind(this)} style={{}}>
                                 退出
                         </Button>
                         </div>

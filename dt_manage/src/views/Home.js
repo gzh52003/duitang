@@ -10,7 +10,27 @@ import 'echarts/lib/component/legend';
 import 'echarts/lib/component/markPoint';
 import ReactEcharts from 'echarts-for-react';
 
+
+import request from "../utils/request.js";
+
+
+
 class Home extends React.PureComponent {
+    state = {
+        sixteen: 0,
+        seventeen: 0,
+        eightteen: 0,
+        nineteen: 0,
+        sixhuo: 0,
+        sevenhuo: 0,
+        eigthhuo: 0,
+        ninehuo: 0,
+        sixfa: 0,
+        sevenfa: 0,
+        eightfa: 0,
+        ninefa: 0,
+        aa: true,
+    }
 
     getOption = () => {
         let option = {
@@ -53,36 +73,104 @@ class Home extends React.PureComponent {
                 }
             ]
         };
+
         return option
     }
 
 
     getOption1 = () => {
+
         let option = {
             legend: {},
             tooltip: {},
             dataset: {
                 dimensions: ['product', '注册用户', '活跃用户', '发布用户'],
                 source: [
-                    { product: '6月', '注册用户': 43.3, '活跃用户': 85.8, '发布用户': 23.7 },
-                    { product: '7月 ', '注册用户': 83.1, '活跃用户': 73.4, '发布用户': 35.1 },
-                    { product: '8月', '注册用户': 86.4, '活跃用户': 65.2, '发布用户': 42.5 },
-                    { product: '9月 ', '注册用户': 72.4, '活跃用户': 53.9, '发布用户': 43.1 }
+                    { product: '2016', '注册用户': this.state.sixteen, '活跃用户': this.state.sixhuo, '发布用户': this.state.sixfa },
+                    { product: '2017 ', '注册用户': this.state.seventeen, '活跃用户': this.state.sevenhuo, '发布用户': this.state.sevenfa },
+                    { product: '2018', '注册用户': this.state.eightteen, '活跃用户': this.state.eigthhuo, '发布用户': this.state.eightfa },
+                    { product: '2019 ', '注册用户': this.state.nineteen, '活跃用户': this.state.ninehuo, '发布用户': this.state.ninefa }
                 ]
             },
             xAxis: { type: 'category' },
             yAxis: {},
-            // Declare several bar series, each will be mapped
-            // to a column of dataset.source by default.
             series: [
                 { type: 'bar' },
                 { type: 'bar' },
                 { type: 'bar' }
             ]
         };
+        if (this.state.aa) {
+            this.setState({
+                aa: false
+            })
+            request.get("/list/search", {
+                kw: "头像",
+                size: 500,
+                page: 1
+
+            }).then((res) => {
+                let a = []
+                res.data.map(item => {
+                    // console.log(item.add_datetime_ts)
+                    // let time = new Date(item.add_datetime);
+                    item.add_datetime = item.add_datetime.substring(0, 4)
+                    if (item.add_datetime === "2016") {
+                        // option.dataset.source[0].注册用户 = option.dataset.source[0].注册用户 + 1
+                        this.setState({
+                            sixteen: this.state.sixteen + 1,
+                            sixhuo: this.state.sixhuo + parseInt(Math.random() * 5),
+                            sixfa: this.state.sixfa + parseInt(Math.random() * 4)
+                        })
+                    } else if (item.add_datetime === "2017") {
+                        this.setState({
+                            seventeen: this.state.seventeen + 1,
+                            sevenhuo: this.state.sevenhuo + parseInt(Math.random() * 5),
+                            sevenfa: this.state.sevenfa + parseInt(Math.random() * 4)
+                        })
+                    } else if (item.add_datetime === "2018") {
+                        this.setState({
+                            eightteen: this.state.eightteen + 1,
+                            eigthhuo: this.state.eigthhuo + parseInt(Math.random() * 5),
+                            eightfa: this.state.eightfa + parseInt(Math.random() * 4)
+                        })
+                    } else if (item.add_datetime === "2019") {
+                        this.setState({
+                            nineteen: this.state.nineteen + 1,
+                            ninehuo: this.state.ninehuo + parseInt(Math.random() * 5),
+                            ninefa: this.state.ninefa + parseInt(Math.random() * 4)
+                        })
+                    }
+                })
+
+            })
+
+            // console.log(res.data)
+            // console.log(option.series[0].data)
+
+        }
+
         return option
     }
 
+    componentWillMount() {
+        // request.get("/list/search", {
+        //     kw: "壁纸",
+        //     size: 500,
+        //     page: 1
+
+        // }).then((res) => {
+        //     // console.log(res)
+        // })
+
+        // request.get("/list/search", {
+        //     kw: "壁纸",
+        //     size: 1500,
+        //     page: 1
+        // }).then((res) => {
+        //     console.log(res)
+        // })
+    }
 
 
 
@@ -91,13 +179,15 @@ class Home extends React.PureComponent {
         return (
             <div>
                 <Row>
-                    <Col span={12}>
+                    <Col span={24}>
                         <Card title="用户浏览记录" style={{ background: "#666", border: "1px solid yellow" }}>
                             <ReactEcharts option={this.getOption()} theme="Imooc" style={{ height: '400px' }} />
                         </Card>
                     </Col>
-                    <Col span={12}>
-                        <Card title="用户类型" style={{ background: "#58bc58", border: "1px solid yellow" }}>
+                </Row>
+                <Row>
+                    <Col span={24} >
+                        <Card title="用户类型" style={{ background: "#58bc58", border: "1px solid yellow" }} >
                             <ReactEcharts option={this.getOption1()} theme="Imooc" style={{ height: '400px' }} />
                         </Card>
                     </Col>

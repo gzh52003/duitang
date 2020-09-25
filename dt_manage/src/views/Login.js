@@ -2,12 +2,37 @@ import React from 'react';
 // import ReactDOM from 'react-dom';
 import "../css/Login.css"
 import sha256 from 'crypto-js/sha256';
-import { Form, Input, Button, Checkbox, message, Row, Col } from 'antd';
-
+import { Form, Input, Button, message, Row, Col } from 'antd';
+import request from "../utils/request.js"
 class Login extends React.PureComponent {
+    state = { image: '' }
+    componentDidMount() {
 
+        this.yanzhengma()
+    }
+
+    // 验证码
+    yanzhengma = () => {
+        request.get("/admin/vscode").then((res) => {
+            console.log(res)
+            if (res.msg === "success") {
+                this.setState({
+                    image: res.data
+                })
+            }
+        })
+    }
+
+
+    // // 记住
+    // rember=()=>{
+    //     console.log("")
+    // }
 
     render() {
+
+
+
         const layout = {
             labelCol: {
                 span: 5,
@@ -23,22 +48,25 @@ class Login extends React.PureComponent {
             },
         };
 
-        // const yan = {
-        //     wrapperCol: {
-        //         offset: 5,
-        //         span: 11,
-        //     },
-        // }
-
         const onFinish = (values) => {
             let $this = this;
-            if (values.password.length > 5 && values.username.length >= 3) {
+            console.log(values)
+            if (values.password.length > 5 && values.username.length >= 2) {
                 let pass = sha256(values.password).toString();
-                console.log(pass)
-                if (values.remember) {
 
-                    $this.props.history.push({ pathname: '/public', state: { name: values.username } })
-                }
+                request.post("admin/login",
+                    {
+                        username: values.username,
+                        password: pass,
+                        vscode: values.check
+                    }).then((res) => {
+                        console.log(res)
+                        // if (values.remember) {
+                        //     localStorage.setItem("wuhu", res.data.authorzation)
+
+                        // }
+                        $this.props.history.push({ pathname: '/public', state: { name: values.username } })
+                    })
             }
         };
 
@@ -46,13 +74,14 @@ class Login extends React.PureComponent {
             message.error('用户名、密码和验证码不能为空');
         };
 
-        function mess() {
-            message.warning("要在自己的电脑上勾选哦(#^.^#)")
-        }
+        // function mess() {
+        //     message.warning("要在自己的电脑上勾选哦(#^.^#)")
+        // }
 
 
 
         return (
+
             <Form
                 {...layout}
                 name="basic"
@@ -64,6 +93,7 @@ class Login extends React.PureComponent {
                 <Form.Item
                     label="用户名"
                     name="username"
+
                     rules={[{ required: true, message: 'Please input your username!' }]}
                 >
                     <Input allowClear maxLength={12} />
@@ -89,16 +119,21 @@ class Login extends React.PureComponent {
 
                         </Form.Item>
                     </Col>
-                    <Col> <span>我是验证码</span>
+                    <Col>
+                        {/* {this.state.image} */}
+                        <div dangerouslySetInnerHTML={{ __html: this.state.image }} onClick={this.yanzhengma}></div>
                     </Col>
+                    {/* <Col> */}
+                    {/* <img src={this.state.image} alt="" />, */}
+                    {/* </Col> */}
                 </Row>
 
-                <Form.Item {...tailLayout} name="remember" valuePropName="checked" >
+                {/* <Form.Item {...tailLayout} name="remember" valuePropName="checked" >
                     <Checkbox onChange={mess.bind(this)}>7天免登录</Checkbox>
-                </Form.Item>
+                </Form.Item> */}
 
                 <Form.Item {...tailLayout}>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" >
                         登录
               </Button>
                 </Form.Item>

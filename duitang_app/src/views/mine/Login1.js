@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavBar, Checkbox, Button } from 'antd-mobile';
 
 
@@ -11,10 +11,11 @@ const tuichu = () => {
 
 function Login() {
     // let a = useState(1)
+    let num = true;
+    const [a, setA] = useState("display");
 
-    const [a, setA] = useState("");
-    const bb = useMemo(() => {
-        let num = true;
+    useEffect(() => {
+
         num = !num;
         console.log(num)
         if (num) {
