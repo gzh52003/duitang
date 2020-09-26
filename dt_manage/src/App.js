@@ -5,10 +5,6 @@ import { Route, Redirect, Switch, withRouter } from 'react-router-dom'
 // import { logout } from './store/actions/user'
 // import { connect } from 'react-redux'
 import './App.css';
-<<<<<<< HEAD
-
-=======
->>>>>>> cxl
 // import { Row, Col, Button } from 'antd';
 
 const Login = lazy(() => import("./views/Login"));
@@ -52,11 +48,6 @@ class App extends React.PureComponent {
 
   render() {
     // const { anniu } = this.state;
-<<<<<<< HEAD
-=======
-    // // console.log(this.props)
-    // // const { value, onIncreaseClick } = this.props
->>>>>>> cxl
     return (
       <div style={{ height: "100vh" }}>
         <Suspense fallback={<div>loading...</div>}>
@@ -66,16 +57,11 @@ class App extends React.PureComponent {
             <Redirect from="/" to="/login" exact />
           </Switch>
         </Suspense>
-      </div >
+      </div>
     );
   }
 }
 
-<<<<<<< HEAD
 
 App = withRouter(App);
-=======
-App = withRouter(App);
-
->>>>>>> cxl
 export default App;

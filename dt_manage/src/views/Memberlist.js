@@ -87,6 +87,7 @@ function Memberlist(props) {
             email,
             authority, '添加', data)
     };
+    
     // 点击切换页码
     const changepages = async (page) => {
         const { data } = await request.get('/admin', { page, size: 10, tal: true })
