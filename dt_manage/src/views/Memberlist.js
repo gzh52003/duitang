@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback,useMemo } from 'react';
 import { Table, Button, Space, Modal, Form, Input, Select, Pagination, Popconfirm } from 'antd';
 import request from '../utils/request'
 import { EditOutlined, DeleteOutlined, QuestionCircleOutlined } from '@ant-design/icons';
-
+import sha256 from 'crypto-js/sha256';
 
 const layout = {
     labelCol: { span: 8 },
@@ -38,19 +38,24 @@ function Memberlist(props) {
     const [visible, setVisible] = useState(false);
     const [addVisible, setaddVisible] = useState(false);
     const [total, gettotal] = useState(10)
-    const [name, setname] = useState()
+    const [UpdataDefalut, setUpdataDefalut] = useState({})
+//    const updata =  useMemo(function(){
+
+//    },[])
 
     // 修改数据
     const xiuGai = useCallback(async function (event) {
         // console.log('修改数据', event.currentTarget.parentElement.parentElement.parentElement.parentElement.firstElementChild.innerHTML)
-        const id = event.currentTarget.parentElement.parentElement.parentElement.parentElement.firstElementChild.innerHTML
-        const { data } = await request.get('/admin/single/' + id)
-        console.log(data);
-        setname(data[0].username)
+        const id = event.currentTarget.parentElement.parentElement.parentElement.parentElement.firstElementChild.innerText
+        const { data:res } = await request.get('/admin/single/' + id)
+        // console.log(data,'data');
+        setUpdataDefalut(res[0])
         setVisible(true)
-        console.log(name);
+        // console.log(name,'name');
     })
-
+    const updataClick = useCallback( async value=>{
+        console.log(value,'修改')
+    },[])
     // 删除数据
     const confirmdelete = useCallback(async function (event) {
         console.log(event, '666', this);
@@ -67,9 +72,11 @@ function Memberlist(props) {
     const addmenber = useCallback(function () {
         setaddVisible(true)
     })
-    const onFinish = async values => {
+    //添加成员确定函数
+    const onFinish = useCallback(async values => {
         let { name: username, phone, gender, email, password, zhiwei: authority } = values
-        request.post('/admin', {
+        password = sha256(password).toString()
+       await request.post('/admin', {
             username,
             phone,
             gender,
@@ -80,18 +87,12 @@ function Memberlist(props) {
         const { data } = await request.get('/admin', { page: 1, size: 10, tal: true })
         setData(data)
         setaddVisible(false)
-
-        console.log(username,
-            phone,
-            gender,
-            email,
-            authority, '添加', data)
-    };
+    },[]);
     // 点击切换页码
-    const changepages = async (page) => {
+    const changepages = useCallback(async (page) => {
         const { data } = await request.get('/admin', { page, size: 10, tal: true })
         setData(data)
-    }
+    },[])
 
     // 请求数据
     useEffect(async () => {
@@ -154,7 +155,6 @@ function Memberlist(props) {
             ),
         }
     ]
-
 
     return (
         <div style={{}}>
@@ -224,8 +224,9 @@ function Memberlist(props) {
                     onOk={() => setVisible(false)}
                     onCancel={() => setVisible(false)}
                     width={1000}
+                    destroyOnClose={true}
                 >
-                    <Form {...layout} name="nest-messages" onFinish={onFinish} initialValues={{ username: name, gender: 'nan' }} validateMessages={validateMessages}>
+                    <Form {...layout} name="nest-messages" onFinish={updataClick} initialValues={UpdataDefalut} validateMessages={validateMessages}>
                         <Form.Item name='username' label="姓名" rules={[{ type: 'name' }]} style={{ width: "50vw" }}>
                             <Input />
                         </Form.Item>

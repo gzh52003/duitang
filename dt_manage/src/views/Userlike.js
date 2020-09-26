@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'antd';
-import request from "../utils/request.js"
 
 import request from '../utils/request'
 

@@ -1,7 +1,13 @@
-import React from 'react';
-function Login() {
+import React, { useEffect } from 'react';
+import {withUser,withStorage} from '../../hoc'
+function Start() {
+    useEffect(function(){
+            console.log()
+    },[])
     return (
-        <div>index</div>
+        <div>我的页面</div>
     )
 }
-export default Login
+// Start = withUser(Start)
+Start = withStorage(Start)
+export default Start

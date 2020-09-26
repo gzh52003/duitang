@@ -180,14 +180,14 @@ class Home extends React.PureComponent {
             <div>
                 <Row>
                     <Col span={24}>
-                        <Card title="用户浏览记录" style={{ background: "#666", border: "1px solid yellow" }}>
+                        <Card title="用户浏览记录" style={{ background: "#666", border: "1px solid #999" }}>
                             <ReactEcharts option={this.getOption()} theme="Imooc" style={{ height: '400px' }} />
                         </Card>
                     </Col>
                 </Row>
                 <Row>
                     <Col span={24} >
-                        <Card title="用户类型" style={{ background: "#58bc58", border: "1px solid yellow" }} >
+                        <Card title="用户类型" style={{ border: "1px solid #999" }} >
                             <ReactEcharts option={this.getOption1()} theme="Imooc" style={{ height: '400px' }} />
                         </Card>
                     </Col>

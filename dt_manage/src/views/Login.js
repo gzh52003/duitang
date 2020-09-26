@@ -23,16 +23,7 @@ class Login extends React.PureComponent {
         })
     }
 
-
-    // // 记住
-    // rember=()=>{
-    //     console.log("")
-    // }
-
     render() {
-
-
-
         const layout = {
             labelCol: {
                 span: 5,
@@ -60,12 +51,14 @@ class Login extends React.PureComponent {
                         password: pass,
                         vscode: values.check
                     }).then((res) => {
-                        console.log(res)
-                        // if (values.remember) {
-                        //     localStorage.setItem("wuhu", res.data.authorzation)
+                        if (res.status === 200) {
+                            let obj = { authority: res.data.authority, username: res.data.username, authorzation: res.data.authorzation }
+                            $this.props.history.push({ pathname: '/public', state: { name: values.username } })
+                            localStorage.setItem("username", JSON.stringify(obj))
+                        } else {
+                            message.error('账号或密码错误,请重试！')
+                        }
 
-                        // }
-                        $this.props.history.push({ pathname: '/public', state: { name: values.username } })
                     })
             }
         };
@@ -73,12 +66,6 @@ class Login extends React.PureComponent {
         const onFinishFailed = () => {
             message.error('用户名、密码和验证码不能为空');
         };
-
-        // function mess() {
-        //     message.warning("要在自己的电脑上勾选哦(#^.^#)")
-        // }
-
-
 
         return (
 
@@ -120,25 +107,14 @@ class Login extends React.PureComponent {
                         </Form.Item>
                     </Col>
                     <Col>
-                        {/* {this.state.image} */}
                         <div dangerouslySetInnerHTML={{ __html: this.state.image }} onClick={this.yanzhengma}></div>
                     </Col>
-                    {/* <Col> */}
-                    {/* <img src={this.state.image} alt="" />, */}
-                    {/* </Col> */}
                 </Row>
-
-                {/* <Form.Item {...tailLayout} name="remember" valuePropName="checked" >
-                    <Checkbox onChange={mess.bind(this)}>7天免登录</Checkbox>
-                </Form.Item> */}
-
                 <Form.Item {...tailLayout}>
                     <Button type="primary" htmlType="submit" >
                         登录
               </Button>
                 </Form.Item>
-
-
             </Form >
         )
     }
