@@ -5,6 +5,10 @@ import { Route, Redirect, Switch, withRouter } from 'react-router-dom'
 // import { logout } from './store/actions/user'
 // import { connect } from 'react-redux'
 import './App.css';
+<<<<<<< HEAD
+=======
+
+>>>>>>> huang
 // import { Row, Col, Button } from 'antd';
 
 const Login = lazy(() => import("./views/Login"));
@@ -64,6 +68,11 @@ class App extends React.PureComponent {
   }
 }
 
+<<<<<<< HEAD
 
 App = withRouter(App);
+=======
+App = withRouter(App);
+
+>>>>>>> huang
 export default App;
