@@ -18,7 +18,7 @@ const { SubMenu } = Menu;
 const Home = lazy(() => import("./views/Home"));
 const Stoplist = lazy(() => import("./views/Stoplist"));
 const Userlist = lazy(() => import("./views/Userlist"));
-const Content = lazy(() => import("./views/Content"));
+const ContentJS = lazy(() => import("./views/Content"));
 const Userlike = lazy(() => import("./views/Userlike"));
 const Memberlist = lazy(() => import("./views/Memberlist"));
 const Listadmin = lazy(() => import("./views/Listadmin"));
@@ -141,7 +141,7 @@ class Public extends React.PureComponent {
                                 <Route path="/public/home" component={Home}></Route>
                                 <Route path="/public/userlist" component={Userlist}></Route>
                                 <Route path="/public/stoplist" component={Stoplist}></Route>
-                                <Route path="/public/content" component={Content}></Route>
+                                <Route path="/public/content" component={ContentJS}></Route>
                                 <Route path="/public/userlike" component={Userlike}></Route>
                                 <Route path="/public/memberlist" component={Memberlist}></Route>
                                 <Route path="/public/listadmin" component={Listadmin}></Route>

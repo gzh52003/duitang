@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Table } from 'antd';
 import request from "../utils/request.js"
 
-import request from '../utils/request'
+// import request from '../utils/request'                                                 
 
 const columns = [
     {
@@ -17,11 +17,7 @@ const columns = [
         key: '_id',
         // ellipsis: true,
         className: "content_row",
-        // rend: text => {
-        //     return (
-        //         <p>{text}</p>
-        //     )
-        // }
+
     },
     {
         title: '喜欢方向',
