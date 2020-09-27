@@ -59,7 +59,7 @@ class App extends React.PureComponent {
             <Redirect from="/" to="/login" exact />
           </Switch>
         </Suspense>
-      </div >
+      </div>
     );
   }
 }

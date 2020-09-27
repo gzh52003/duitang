@@ -22,7 +22,7 @@ function Content(props) {
 
     // 请求数据
     useEffect( async ()=>{
-        const {data} = await request.get('/list/by_search',{page:1,size:10})
+        const {data} = await request.get('/list/by_search',{page:1,size:2000})
         data.map((item)=>{
           item.username = item.sender.username;
           item.content = item.album.name

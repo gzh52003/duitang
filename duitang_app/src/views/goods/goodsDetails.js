@@ -14,7 +14,7 @@ class goodsDetails extends React.PureComponent {
         this.props.dispatch({ type: 'tabbar', show: true })
         const { id } = this.props.match.params
         const { data } = await axios.get('http://120.24.63.27:2001/api/goods/single/' + id)
-        console.log(data);
+        // console.log(data);
         this.setState({
             goodsDetailsDese: data.data
         })

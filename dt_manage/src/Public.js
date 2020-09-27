@@ -64,7 +64,6 @@ class Public extends React.PureComponent {
             name: names
         })
 
-
     }
     componentWillUnmount() {
         console.log(this.state.name)
