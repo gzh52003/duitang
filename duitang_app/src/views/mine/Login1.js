@@ -1,6 +1,7 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavBar, Checkbox, Button } from 'antd-mobile';
 
+import { useHistory } from "react-router-dom";
 
 
 
@@ -11,19 +12,28 @@ const tuichu = () => {
 
 function Login() {
     // let a = useState(1)
+    // let num = true;
+    // let []
+    const [AA, setAA] = useState(false);
+    function handleClick() {
+        useHistory.push("/login2");
+    }
+    useEffect(() => {
 
-    const [a, setA] = useState("");
-    const bb = useMemo(() => {
-        let num = true;
-        num = !num;
-        console.log(num)
-        if (num) {
-            console.log("Asd")
-        }
-    }, [a])
+        // num = !num;
+        // console.log(num)
+        // if (num) {
+        //     // console.log("Asd")
+        // }
+        // const fff = () => {
 
 
 
+        // }
+    })
+
+
+    setAA(true)
 
     return (
         <div >
@@ -45,10 +55,10 @@ function Login() {
                 <p>换了手机也能找得到哦</p>
             </div>
             <div style={{ paddingTop: "50px" }}>
-                <Button style={{ width: "56%", borderRadius: "50px", margin: "0 auto" }} type="warning">开始堆糖</Button>
+                <Button style={{ width: "56%", borderRadius: "50px", margin: "0 auto" }} type="warning" onClick={handleClick}>开始堆糖</Button>
             </div>
             <div style={{ margin: "0 auto", width: "80%", textAlign: "center", paddingTop: "3%" }}>
-                <Checkbox onChange={e => setA(a === e.target.checked)} style={{ display: "inline-block" }}>
+                <Checkbox onChange={setAA(true)} style={{ display: "inline-block" }} disabled={AA}>
                 </Checkbox>
                 <p style={{ display: "inline-block" }}>同意<span>《堆糖用户协议》</span>和<span>《隐私政策》</span></p>
             </div>

@@ -48,6 +48,8 @@ class App extends React.PureComponent {
 
   render() {
     // const { anniu } = this.state;
+    // // console.log(this.props)
+    // // const { value, onIncreaseClick } = this.props
     return (
       <div style={{ height: "100vh" }}>
         <Suspense fallback={<div>loading...</div>}>

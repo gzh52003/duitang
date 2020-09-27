@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import Home from './views/Home/Home.js'
 import Discovery from './views/Discovery'
 import Goods from './views/goods/Goods'
-import Mine from './views/Mine'
+import Mine from './views/mine/Index'
 import Login from './views/Login'
 import Reg from './views/Reg'
 import Goodindex from "./views/goods/goodsindex"

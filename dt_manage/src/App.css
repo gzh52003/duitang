@@ -40,3 +40,6 @@ body{
     transform: rotate(360deg);
   }
 }
+.ant-card-head {
+  border-bottom:1px solid #61dafb
+}

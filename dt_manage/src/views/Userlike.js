@@ -1,64 +1,64 @@
-import React,{userState,useEffect} from 'react';
-import { Table, Button } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Table } from 'antd';
 
 import request from '../utils/request'
-
 
 const columns = [
     {
         title: '用户名',
-        dataIndex: 'name',
-        key: 'name',
-        render: text => <span>{text}</span>,
+        dataIndex: 'username',
+        key: '_id',
+
     },
     {
-        title: '发布内容',
-        dataIndex: 'phone',
-        key: 'phone',
+        title: '图片',
+        dataIndex: 'photo',
+        key: '_id',
         // ellipsis: true,
         className: "content_row",
-        rend: text => {
-            return (
-                <p>{text}</p>
-            )
-        }
+        // rend: text => {
+        //     return (
+        //         <p>{text}</p>
+        //     )
+        // }
     },
     {
-        title: '发布时间',
-        dataIndex: 'sex',
-        key: 'sex',
-    },
-    {
-        title: '浏览记录',
-        dataIndex: 'address',
-        key: 'address',
-    },
-    {
-        title: '点赞人数',
-        dataIndex: 'address',
-        key: 'address',
-    },
-    {
-        title: '操作',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: text => <> {
-            text.map(ind => {
-                if (ind === "nice") {
-                    return (
+        title: '喜欢方向',
+        dataIndex: 'name',
+        key: '_id',
 
-                        <Button key={ind + 1} type="primary" danger>{ind}</Button>
-                        // <Button key={ind + 1} onClick={}>{ind}</Button>
-                    )
-                } else {
-                    return (
-                        <Button key={ind + 1} style={{ background: "#58bc58" }}>{ind}</Button>
-                    )
-                }
-            })
-        }
-        </>
-    }
+    },
+    // {
+    //     title: '浏览记录',
+    //     dataIndex: 'address',
+    //     key: 'address',
+    // },
+    // {
+    //     title: '点赞人数',
+    //     dataIndex: 'address',
+    //     key: 'address',
+    // },
+    // {
+    //     title: '操作',
+    //     key: 'tags',
+    //     dataIndex: 'tags',
+    //     // render: text => <> {
+    //     //     text.map(ind => {
+    //     //         if (ind === "nice") {
+    //     //             return (
+
+    //     //                 <Button key={ind + 1} type="primary" danger>{ind}</Button>
+    //     //                 // <Button key={ind + 1} onClick={}>{ind}</Button>
+    //     //             )
+    //     //         } else {
+    //     //             return (
+    //     //                 <Button key={ind + 1} style={{ background: "#58bc58" }}>{ind}</Button>
+    //     //             )
+    //     //         }
+    //     //     })
+    //     // }
+    //     // </>
+    // }
 ]
 
 const showQuickJumper = () => {
@@ -73,14 +73,31 @@ const showSizeChanger = () => {
 
 }
 
-function Userlike(props) {
-    // const [data,setData] = userState([{}])
+function Userlike() {
+    // console.log('home.props=', props)
+    let [data, setdata] = useState([]);
 
-    console.log('home.props=', props)
+    useEffect(() => {
+        if (data.length !== 0) return;
+        request.get("/list/by_search", {
+            params: {}
+        }).then((res) => {
+            res.data.map((item) => {
+                item.username = item.sender.username
+                item.photo = item.photo.path
+                item.name = item.album.name
+            })
+            // console.log(res.data)
+            setdata(data = res.data)
+        })
 
+
+    })
+    console.log(data)
 
     return (
-        <div style={{}}>
+
+        < div style={{}}>
             <>
                 {/* <Table columns={columns} dataSource={data} pagination={{
                     showSizeChanger,
