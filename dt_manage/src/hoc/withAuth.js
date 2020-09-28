@@ -22,30 +22,66 @@ export function withAuth(InnerComponent){
             path:'/public/content',
             icon:<ProfileOutlined />
         },{
-            name:'用户喜好',
-            path:'/public/userlike',
-            icon:<MehOutlined />
-        },{
             name:'成员管理',
             path:'/public/memberlist',
             icon:<TeamOutlined />
-        },{
-            name:'榜单管理',
-            path:'/public/listadmin',
-            icon:<TableOutlined />
         }]
     }
         render(){
-               console.log('auth.props',this.props)          
+               console.log('auth.props',this.props)  
+               let menus         
             if(this.props.username.authorzation){
-                let menus 
+                
                 switch(this.props.username.authority){
-                    case 'general_manager':
-                        // menus = 
+                    case '员工':
+                       menus = [{
+                        name:'首页',
+                        path:'/public/home',
+                        icon:<HomeOutlined />,
+            
+                    },{
+                        submenu:[
+                            {name:'用户列表',
+                        path:'/public/userlist',
+                        },{
+                            name:'禁用列表',
+                            path:'/public/stoplist'
+                        }
+                        ]
+                    },{
+                        name:'内容管理',
+                        path:'/public/content',
+                        icon:<ProfileOutlined />
+                    }]
+                        break
+                    default:
+                      menus = [{
+                        name:'首页',
+                        path:'/public/home',
+                        icon:<HomeOutlined />,
+            
+                    },{
+                        submenu:[
+                            {name:'用户列表',
+                        path:'/public/userlist',
+                        },{
+                            name:'禁用列表',
+                            path:'/public/stoplist'
+                        }
+                        ]
+                    },{
+                        name:'内容管理',
+                        path:'/public/content',
+                        icon:<ProfileOutlined />
+                    },{
+                        name:'成员管理',
+                        path:'/public/memberlist',
+                        icon:<TeamOutlined />
+                    }]
                 }
 
 
-              return  <InnerComponent {...this.props} menu={this.state.menus} />
+              return  <InnerComponent {...this.props} menu={menus} />
             }else{
                 console.log('重定向',)
                 // this.goto('/login')

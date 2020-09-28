@@ -19,9 +19,9 @@ const Home = lazy(() => import("./views/Home"));
 const Stoplist = lazy(() => import("./views/Stoplist"));
 const Userlist = lazy(() => import("./views/Userlist"));
 const ContentJS = lazy(() => import("./views/Content"));
-const Userlike = lazy(() => import("./views/Userlike"));
+// const Userlike = lazy(() => import("./views/Userlike"));
 const Memberlist = lazy(() => import("./views/Memberlist"));
-const Listadmin = lazy(() => import("./views/Listadmin"));
+// const Listadmin = lazy(() => import("./views/Listadmin"));
 
 
 class Public extends React.PureComponent {
@@ -33,23 +33,21 @@ class Public extends React.PureComponent {
 
     // 路由跳转
     goto = (path) => {
-        // console.log(this.props.history, path)
         this.props.history.push(path);
     }
 
 
     tuichu = () => {
-        this.props.history.push("/login");
+        this.props.history.replace("/login");
+        localStorage.removeItem('username')
     }
 
     // // 路由跳转
     // change = (path) => {
-    //     console.log(this.props.match, path)
     //     this.props.match.url = "/login"
     // }
 
     componentWillMount() {
-        // console.log(localStorage.getItem("wuhu"))
         const { pathname } = this.props.location;
         let names = "";
         if (this.props.location.state) {
@@ -58,16 +56,14 @@ class Public extends React.PureComponent {
             names = localStorage.getItem("name")
         }
         // this.state.name = names
-        // console.log(names)
         this.setState({
             address: pathname,
             name: names
         })
+        console.log('public路由守卫',this.state)
 
     }
     componentWillUnmount() {
-        console.log(this.state.name)
-        // console.log(localStorage.getItem("wuhu"))
 
     }
 
@@ -90,9 +86,7 @@ class Public extends React.PureComponent {
 
 
     render() {
-        // console.log(this.state, this.props.location.state.name)
         localStorage.setItem("name", this.state.name)
-        console.log('public',this.props)
         return (
             <div style={{ height: "100vh" }}>
                  <Layout>
@@ -105,7 +99,7 @@ class Public extends React.PureComponent {
                                 <Col span={12}>
                                     <div style={{ float: "right", padding: "0 10% 0 0 " }} >
                                         <span style={{ cursor: "pointer", fontSize: "20px", margin: "0 10px" }}>
-                                            <span>欢迎您！</span>{this.state.name}</span>
+                                            <span>欢迎您！</span><i style={{color:"skyblue",fontStyle:'normal'}}>{this.state.name}</i></span>
                                         <Button onClick={this.tuichu.bind(this)} style={{}}>
                                             退出
                                     </Button>
@@ -163,9 +157,9 @@ class Public extends React.PureComponent {
                                         <Route path="/public/userlist" component={Userlist}></Route>
                                         <Route path="/public/stoplist" component={Stoplist}></Route>
                                         <Route path="/public/content" component={ContentJS}></Route>
-                                        <Route path="/public/userlike" component={Userlike}></Route>
+                                        {/* <Route path="/public/userlike" component={Userlike}></Route> */}
                                         <Route path="/public/memberlist" component={Memberlist}></Route>
-                                        <Route path="/public/listadmin" component={Listadmin}></Route>
+                                        {/* <Route path="/public/listadmin" component={Listadmin}></Route> */}
                                         <Redirect from="/public" to="/public/home" exact />
                                     </Switch>
                                 </Suspense>

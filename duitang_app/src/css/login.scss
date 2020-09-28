@@ -4,6 +4,9 @@ $vh:2030;
 $b:100;
 .login-close{
     height:248vh / $vh *$b;
+    svg{
+        margin:44vh/$vh*$b 0 0 64vw/$vw*$b
+    }
 }
 .login-container{
     padding-left:9.6vw;
@@ -43,6 +46,9 @@ $b:100;
     color:#df5f78;
     border-radius: 32vh / $vh*$b;
     text-align:center;
+    span{
+        vertical-align: top;
+    }
 }
 .login-on-click-login{
     width:880vw / $vw * $b;
@@ -58,9 +64,42 @@ $b:100;
 }
 .login-password{
     margin-top:54vh/$vh*$b;
-    margin-bottom:605vh/$vh*$b;
+    margin-bottom:602vh/$vh*$b;
     text-align:center;
     font-size: 36vh/$vh*$b;
     color:#d06464;
 
+}
+.login-other{
+    text-align:center;
+    margin-bottom:82vh / $vh *$b;
+    span{
+        vertical-align: middle;
+        margin: 0 25vw / $vw *$b;
+    }
+    b{
+        width:250vw / $vw * $b;
+        height:1px;
+        display:inline-block;
+        // transform: translateY(-50%);
+        vertical-align: middle;
+        background:#ededed;
+    }
+}
+
+.login-other-box{
+    .login-other-icon{
+        text-align:center;
+        .login-other-icon-item{
+            display:inline-block;
+            text-align: center;
+            margin:0 35vw / $vw *$b;
+            img{
+                width:132vw / $vw *$b;
+            }
+            p{
+                font-size:30vh / $vh *$b;
+            }
+        }
+    }
 }

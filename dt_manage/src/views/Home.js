@@ -112,7 +112,6 @@ class Home extends React.PureComponent {
             }).then((res) => {
                 let a = []
                 res.data.map(item => {
-                    // console.log(item.add_datetime_ts)
                     // let time = new Date(item.add_datetime);
                     item.add_datetime = item.add_datetime.substring(0, 4)
                     if (item.add_datetime === "2016") {

@@ -18,8 +18,7 @@ const validateMessages = {
 };
 
 const zhiwei = [
-    { label: '老板', value: '老板' },
-    { label: 'CEO', value: 'ceo' },
+   
     { label: '总经理', value: '总经理' },
     { label: '总监', value: '总监' },
     { label: '主管', value: '主管' },
@@ -32,7 +31,6 @@ const selectGender = [
 
 
 function Memberlist(props) {
-    // console.log('home.props=', props)
     const [data, setData] = useState([])
     const [visible, setVisible] = useState(false);
     const [addVisible, setaddVisible] = useState(false);
@@ -52,7 +50,6 @@ function Memberlist(props) {
 
     })
     const updataClick = useCallback(async value => {
-        // console.log(value, '修改')
         const { _id, username, gender, phone, email, passsword, authority } = value
         await request.put('admin/updata/' + _id, {
             username, gender, phone, email, passsword, authority
@@ -72,7 +69,6 @@ function Memberlist(props) {
     // 删除数据
     const deletehandleOk = useCallback(async () => {
         setdeleteOKload(true)
-        // console.log(deleteid, 32424);
         await request.remove('/admin/' + deleteid)
         setTimeout(() => {
             setdeleteVisible(false)
@@ -128,7 +124,6 @@ function Memberlist(props) {
     }, [])
     // 搜索功能
     const searchMenber = useCallback(async function(value){
-        // console.log(value);
         if(value){
             const {data} = await request.get('admin/search',{q:value})
             setData(data)
