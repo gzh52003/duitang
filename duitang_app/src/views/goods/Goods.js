@@ -1,6 +1,9 @@
 import React from 'react';
-import { NavBar, Icon, Carousel, WingBlank, Grid, Tag } from 'antd-mobile';
+import { NavBar, Icon, Carousel, WingBlank, Grid, Tag, List } from 'antd-mobile';
 import axios from 'axios';
+
+const Item = List.Item;
+const Brief = Item.Brief;
 const goodsMenu = [{
     icon: '/img/category_flower1.png',
     text: '鲜花',
@@ -35,12 +38,30 @@ class Goods extends React.Component {
         tabs: [
             { title: 'First Tab' },
             { title: 'Second Tab' },
-        ]
+        ],
+        pinShow: [],
+        jingXuanMenu: [],
+        youhui: '',
+        data: ['1', '2', '3'],
+        imgHeight: '12vh',
     }
     gotolist = (el, idx) => {
         this.props.history.push('/goods/goodslist/' + el.text + idx);
     }
-    componentDidMount() {
+    async componentDidMount() {
+        const { data } = await axios.post('http://120.24.63.27:2001/api/goods/list')
+        this.setState({
+            ...this.state,
+            pinShow: data.data
+        })
+        const { data: result } = await axios.post('http://120.24.63.27:2001/api/goods/list', { page: 2, size: 20 })
+
+        this.setState({
+            ...this.state,
+            jingXuanMenu: result.data,
+            youhui: parseInt((Math.random() * 20) + 1)
+        })
+
         let t;
         let time2 = new Date('2020-10-1 11:00:00').getTime()
         let time1 = Date.now()
@@ -69,7 +90,11 @@ class Goods extends React.Component {
                 sec: sec
             })
         }, 1000)
-
+        setTimeout(() => {
+            this.setState({
+              data: ['AiyWuByWklrrUDlFignR', 'TekJlZRVCjLFexlOCuWn', 'IJOtIlfsYdTyaDTRVrLI'],
+            });
+          }, 100);
     }
     render() {
         return (
@@ -98,7 +123,7 @@ class Goods extends React.Component {
                         </WingBlank>
                     </NavBar>
 
-                    <div style={{ background: 'linear-gradient(to bottom, #fff 10%, #cdcdcd)' }}>
+                    <div style={{ background: 'linear-gradient(to bottom, #fff , #cdcdcd)', paddingBottom: '30px' }}>
                         <div style={{ height: '45px' }}></div>
                         <Grid data={data} hasLine={false} columnNum='5' style={{ height: '90px' }} onClick={(el, idx) => { this.gotolist(el, idx) }} />
 
@@ -106,7 +131,7 @@ class Goods extends React.Component {
                             <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
                                 <div style={{ width: '60%', height: '6.4vh' }}>
                                     <h3 style={{ marginBottom: '5px', fontWeight: 'bold' }}>拼手速</h3>
-                                    <p>本场剩余<b style={{color:'#ee8581'}}>{this.state.hours}</b> 时 <b style={{color:'#ee8581'}}>{this.state.min}</b> 分 <b style={{color:'#ee8581'}}>{this.state.sec}</b> 秒</p>
+                                    <p>本场剩余<b style={{ color: '#ee8581' }}>{this.state.hours}</b> 时 <b style={{ color: '#ee8581' }}>{this.state.min}</b> 分 <b style={{ color: '#ee8581' }}>{this.state.sec}</b> 秒</p>
                                 </div>
 
                                 <div style={{ width: '40%', display: 'flex', justifyContent: 'space-between' }}>
@@ -121,45 +146,72 @@ class Goods extends React.Component {
                                 </div>
 
                             </div>
-                            <div className='pinContain' style={{width:'100%',overflowX:'auto'}}>
-                                <div style={{display:'flex',justifyContent:'space-between',width:'90vw'}}>
-                                    <div style={{width:'34vw',marginRight:'10px',border:'solid 1px #ebebeb',borderRadius:'10px',height:'24.8vh',background:'url("/img/pin1.jpg") no-repeat',backgroundSize:'34vw 17vh'}}>
-                                        {/* <img src='/img/pin1.jpg' alt='' style={{width:'100%'}}/> */}
-                                        <div style={{height:'16vh'}}></div>
-                                        <p style={{padding:'6px',color:'#444444',boxSizing:'border-box',width:'34vw',fontSize:'12px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>好趣味麻辣脆锅巴办公室桶装零食品小吃营养休闲小米锅巴</p>
-                                        <Tag data-seed="logId" style={{marginLeft:'5px',background:'#ec655f',border:'none',color:'#fff',transform:'scale(0.85)'}} small={true}>券10元</Tag>
-                                        <p style={{color:'#ec655f',fontSize:'12px',paddingLeft:'6px',transform:'scale(0.8)'}}>到手价<strong style={{fontSize:'18px'}}>￥5.49</strong></p>
-                                    </div>
-                                    <div style={{width:'34vw',marginRight:'10px',border:'solid 1px #ebebeb',borderRadius:'10px',height:'24.8vh',background:'url("/img/pin1.jpg") no-repeat',backgroundSize:'34vw 17vh'}}>
-                                        {/* <img src='/img/pin1.jpg' alt='' style={{width:'100%'}}/> */}
-                                        <div style={{height:'16vh'}}></div>
-                                        <p style={{padding:'6px',color:'#444444',boxSizing:'border-box',width:'34vw',fontSize:'12px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>好趣味麻辣脆锅巴办公室桶装零食品小吃营养休闲小米锅巴</p>
-                                        <p style={{color:'#ec655f',fontSize:'12px',paddingLeft:'6px'}}>到手价<strong style={{fontSize:'18px'}}>￥5.49</strong></p>
-                                    </div>
-                                    <div style={{width:'34vw',border:'solid 1px #ebebeb',borderRadius:'10px',height:'24.8vh',background:'url("/img/pin1.jpg") no-repeat',backgroundSize:'34vw 17vh'}}>
-                                        {/* <img src='/img/pin1.jpg' alt='' style={{width:'100%'}}/> */}
-                                        <div style={{height:'16vh'}}></div>
-                                        <p style={{padding:'6px',color:'#444444',boxSizing:'border-box',width:'34vw',fontSize:'12px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>好趣味麻辣脆锅巴办公室桶装零食品小吃营养休闲小米锅巴</p>
-                                        <p style={{color:'#ec655f',fontSize:'12px',paddingLeft:'6px'}}>到手价<strong style={{fontSize:'18px'}}>￥5.49</strong></p>
-                                    </div>
-                                    <div style={{width:'34vw',border:'solid 1px #ebebeb',borderRadius:'10px',height:'24.8vh',background:'url("/img/pin1.jpg") no-repeat',backgroundSize:'34vw 17vh'}}>
-                                        {/* <img src='/img/pin1.jpg' alt='' style={{width:'100%'}}/> */}
-                                        <div style={{height:'16vh'}}></div>
-                                        <p style={{padding:'6px',color:'#444444',boxSizing:'border-box',width:'34vw',fontSize:'12px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>好趣味麻辣脆锅巴办公室桶装零食品小吃营养休闲小米锅巴</p>
-                                        <p style={{color:'#ec655f',fontSize:'12px',paddingLeft:'6px'}}>到手价<strong style={{fontSize:'18px'}}>￥5.49</strong></p>
-                                    </div>
-                                    <div style={{width:'34vw',border:'solid 1px #ebebeb',borderRadius:'10px',height:'24.8vh',background:'url("/img/pin1.jpg") no-repeat',backgroundSize:'34vw 17vh'}}>
-                                        {/* <img src='/img/pin1.jpg' alt='' style={{width:'100%'}}/> */}
-                                        <div style={{height:'16vh'}}></div>
-                                        <p style={{padding:'6px',color:'#444444',boxSizing:'border-box',width:'34vw',fontSize:'12px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>好趣味麻辣脆锅巴办公室桶装零食品小吃营养休闲小米锅巴</p>
-                                        <p style={{color:'#ec655f',fontSize:'12px',paddingLeft:'6px'}}>到手价<strong style={{fontSize:'18px'}}>￥5.49</strong></p>
-                                    </div>
+                            <div className='pinContain' style={{ width: '100%', overflowX: 'auto' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', width: '90vw' }}>
+                                    {
+                                        this.state.pinShow.map(item => <div onClick={() => this.props.history.push('/goods/goodsdetails/' + item.ItemCode)} style={{ width: '34vw', marginRight: '10px', border: 'solid 1px #ebebeb', borderRadius: '10px', height: '24.8vh', background: `url(${'http://120.24.63.27:2005/img/' + item.ItemCode + '.jpg_220x240.jpg'}) no-repeat`, backgroundSize: '34vw 17vh' }}>
+                                            {/* <img src='/img/pin1.jpg' alt='' style={{width:'100%'}}/> */}
+                                            <div style={{ height: '17vh' }}></div>
+                                            <p style={{ padding: '0 6px', color: '#444444', boxSizing: 'border-box', width: '34vw', fontSize: '12px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.Cpmc}</p>
+                                            <Tag data-seed="logId" style={{ marginLeft: '5px', background: '#ec655f', border: 'none', color: '#fff', transform: 'scale(0.85)' }} small={true}>券10元</Tag>
+                                            <p style={{ color: '#ec655f', fontSize: '12px', transform: 'scale(0.9)' }}>到手价<strong style={{ fontSize: '18px' }}>￥{item.Price}</strong></p>
+                                        </div>)
+                                    }
+
                                 </div>
                             </div>
                         </div>
 
-                        <div style={{ background: '#fff', width: '90vw', height: '22.3vh', marginTop: '10px', margin: '10px auto', borderRadius: '20px' }}>
-                            <div></div>
+                        <div style={{ width: '90vw', height: '22.3vh', marginTop: '10px', margin: '10px auto' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2px' }}>
+                                <div style={{ width: '49.7%', borderRadius: '20px 0 0 0', background: '#fff url("/img/dapai_03.jpg") no-repeat right center', backgroundSize: 'contain', padding: '12px', boxSizing: 'border-box' }}>
+                                    <h3 style={{ marginBottom: '5px', fontWeight: 'bold' }}>大额券</h3>
+                                    <p style={{ fontSize: '12px', color: '#d6d6d6' }}>领券省超多</p>
+                                </div>
+
+                                <div style={{ width: '49.7%', display: 'flex', justifyContent: 'space-between', background: '#fff url("/img/dapai_06.jpg") no-repeat right center', backgroundSize: 'contain', borderRadius: '0 20px 0 0' }}>
+                                    <div style={{ background: '#fff', alignItems: 'center', padding: '12px', boxSizing: 'border-box' }}>
+                                        <h3 style={{ marginBottom: '5px', fontWeight: 'bold' }}>口碑Top10</h3>
+                                        <p style={{ fontSize: '12px', color: '#d6d6d6' }}>大家都在买</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style={{ background: '#fff', width: '100%', height: '12vh', borderRadius: '0 0 20px 20px' }}>
+                                <WingBlank>
+                                    <Carousel
+                                        autoplay={false}
+                                        infinite
+                                        beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
+                                        afterChange={index => console.log('slide to', index)}
+                                        style={{height:'12vh'}}
+                                        dots={false}
+                                        autoplay={false}
+                                    >
+                                        {this.state.data.map(val => (
+                                            <>
+                                            <div style={{display:'flex',marginTop:'6px'}}>
+                                                <img style={{width:'30%',height:'10vh',display:'inline-block',marginRight:'10px'}} src="https://c-ssl.duitang.com/uploads/item/202009/25/20200925163316_LKWmj.jpeg" alt=""/>
+                                                <span style={{verticalAlign:'middle',fontSize:'12px',color:'#565656'}}>谁说爱吃月饼是“中老年”喜好？这些月饼，今年中秋一定要吃到</span>
+                                            </div>
+                                            </>
+                                        ))}
+                                    </Carousel>
+                                </WingBlank>
+                            </div>
+                        </div>
+
+                        <div className="jingXuan" style={{ width: '100%', background: '#fff', padding: '10px 4.8vw 0', boxSizing: 'border-box' }}>
+                            <h2 style={{ fontSize: '16px' }}>值呀精选</h2>
+                            <p style={{ fontSize: '12px', color: '#ababab', margin: '6px 0px' }}>这些优惠值得看！每天更新哦</p>
+                            {
+                                this.state.jingXuanMenu.map(item => <Item align="top" thumb={'http://120.24.63.27:2005/img/' + item.ItemCode + '.jpg_220x240.jpg'} style={{ width: '100%' }} multipleLine onClick={() => { this.props.history.push('/goods/goodsdetails/' + item.ItemCode + '?youhui=' + this.state.youhui) }}>
+                                    {item.Instro}
+                                    <Brief><strong style={{ color: '#ee8581', fontSize: '16px', marginRight: '8px' }}>￥{item.Price}</strong><del style={{ color: '#d6d6d6', fontSize: '12px' }}>原价 ￥{item.LinePrice}</del></Brief>
+                                    <div style={{ width: '100%', boxSizing: 'border-box', paddingRight: '14px', display: 'flex', justifyContent: 'space-between' }}><p style={{ background: '#ec655f', width: '60px', color: '#fff', borderRadius: '4px', textAlign: 'center' }}>领{this.state.youhui}元券</p><span style={{ color: '#d6d6d6', fontSize: '12px' }}>天猫</span></div>
+                                </Item>)
+                            }
+
+
                         </div>
                     </div>
 
