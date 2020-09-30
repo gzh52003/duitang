@@ -67,3 +67,13 @@ div,p,ul,li,h1,h2,h3,h4,h5,h6{
 .am-wingblank.am-wingblank-lg{
   width: 300px;
 }
+
+ .am-navbar .am-navbar-title{
+   font-size: 16px;
+ }
+
+ .pinContain::-webkit-scrollbar{
+   display: none
+ }
+
+
