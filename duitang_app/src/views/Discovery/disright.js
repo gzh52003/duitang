@@ -4,7 +4,7 @@ import { Carousel } from 'antd-mobile';
 
 function Login(props) {
     // const data = ['1', '2', '3']
-
+    console.log("dis")
     // const data1 = ["李芯", "中秋节", "ios14桌面壁纸", "重启之极海听雷", "推搪游乐园", "好运壁纸", "鱼鱼气泡水", "国庆", "杨芸晴", "水光", "有翡", "绿色背景图", "bang dream", "画手表格", "爱会消失", "superme", "古风灯笼", "盘子画", "权恩妃", "天空壁纸"]
     const dataa = [{
         id: "1",
@@ -107,8 +107,9 @@ function Login(props) {
     }
     ]
 
-    const tiaozhuan = () => {
-        props.history.push('/goods/')
+    const tiaozhuan = (ee) => {
+        // console.log(ee)
+        props.history.push('/discovery/search/list/' + ee.name)
     }
 
     return (
@@ -131,7 +132,7 @@ function Login(props) {
             <div >
                 {
                     dataa.map(item => {
-                        return <div style={{ display: "inline-block", width: "48%", height: "120px", marginLeft: "1%" }} key={item.id} onClick={tiaozhuan}>
+                        return <div style={{ display: "inline-block", width: "48%", height: "120px", marginLeft: "1%" }} key={item.id} onClick={() => tiaozhuan(item)}>
                             <img src={item.path} alt="" style={{ width: "100%", height: "110px" }} />
                         </div>
                     })

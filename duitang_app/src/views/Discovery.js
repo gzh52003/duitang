@@ -1,20 +1,20 @@
 import React, { Suspense } from 'react';
-import { Route, Switch } from 'react-router-dom'
-import index from './Discovery/index'
-import search from './Discovery/search'
+import { Route, Switch, Redirect } from 'react-router-dom'
+import Index from './Discovery/index'
+import Search from './Discovery/search'
 // import goodsDetails from './goodsDetails';
 
 function GoodsIndex() {
     return (
         <div>
-            <Suspense fallback={<div>loading...</div>}>
-                <Switch>
-                    {/* <Route path='/goods/goodslist/:id' component={GoodsList} /> */}
-                    <Route path='/search/:id' component={search} />
-                    <Route path='/discovery' component={index} />
-                    {/* <Redirect from="/" to="discovery"></Redirect>s */}
-                </Switch>
-            </Suspense>
+            {/* <Suspense> */}
+            <Switch>
+                <Route path='/discovery/search' component={Search} />
+                <Route path='/discovery/home' component={Index} />
+                <Redirect from="/discovery" to="/discovery/home" exact></Redirect>
+                {/* <Route path='/discovery/list/:id' component={index} /> */}
+            </Switch>
+            {/* </Suspense> */}
         </div>
     )
 }
