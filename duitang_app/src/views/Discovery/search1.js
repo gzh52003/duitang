@@ -21,6 +21,26 @@ function Login(props) {
         props.history.push('/discovery/search/list/' + aa)
     }
 
+    // console.log(props.match.params.id)
+
+    // 条件渲染
+    const button = props.match.params.id === "id" ? (
+        <div>
+            <div style={{ padding: "14px 1%", color: "#888", fontSize: "16px" }}>热门搜索</div>
+            <div style={{ padding: "0 3%" }}>
+                {
+                    list.map(item =>
+                        <Button type="ghost" inline size="small" style={{ marginRight: '3%', background: "#bbb", color: "#222", marginBottom: "1%" }} onClick={() => tiaozhuang(item)}>{item}</Button>
+                    )
+                }
+            </div>
+        </div>
+    ) : (
+            <div></div>
+        );
+
+
+
     // const { getFieldProps } = props.form;
     return (
         <div>
@@ -53,15 +73,11 @@ function Login(props) {
 
             {/* 热门搜索 */}
             <div>
-                <div style={{ padding: "14px 1%", color: "#888", fontSize: "16px" }}>热门搜索</div>
-                {/* <Button type="ghost" inline size="small" style={{ marginRight: '4px' }} onClick={tiaozhuang(this)}>ghost</Button> */}
-                <div style={{ padding: "0 3%" }}>
-                    {
-                        list.map(item =>
-                            <Button type="ghost" inline size="small" style={{ marginRight: '3%', background: "#bbb", color: "#222", marginBottom: "1%" }} onClick={() => tiaozhuang(item)}>{item}</Button>
-                        )
-                    }
-                </div>
+
+
+                {button}
+
+
             </div>
         </div>
     )

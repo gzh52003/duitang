@@ -46,7 +46,7 @@ function Discovery(props) {
 
 
     let tiaozhuan = () => {
-        props.history.push('/discovery/search')
+        props.history.push('/discovery/search/index/' + "id")
         // console.log(props)
         // props.match.path = "/search"
     }

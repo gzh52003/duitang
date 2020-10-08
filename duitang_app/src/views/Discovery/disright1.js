@@ -2,7 +2,7 @@ import React from 'react';
 import request from "../../utils/request"
 function Login(props) {
     const tiaozhuang = (ee) => {
-        props.history.push('/discovery/search/list/' + ee.name)
+        props.history.push('/discovery/search/index/' + ee.name)
         // console.log(ee)
     }
     const xuan = props.match.params.name;

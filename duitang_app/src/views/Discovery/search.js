@@ -10,8 +10,8 @@ function Login() {
     return (
         <div>
             <Switch>
-                <Route path='/discovery/search/index' component={Search1} />
-                <Route path='/discovery/search/list/:id' component={Search2} />
+                <Route path='/discovery/search/index/:id' component={Search1} />
+                {/* <Route path='/discovery/search/list/:id' component={Search2} /> */}
                 <Redirect from="/discovery/search" to="/discovery/search/index" exact></Redirect>
                 {/* <Route path='/discovery/list/:id' component={index} /> */}
             </Switch>
