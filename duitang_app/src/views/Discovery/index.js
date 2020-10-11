@@ -4,11 +4,11 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import { Carousel, Tabs } from 'antd-mobile';
 import { createForm } from 'rc-form';
 
+import Disright from "./disright";
+import Disright1 from "./disright1";
 
 
 
-const disright = lazy(() => import("./disright"));
-const disright1 = lazy(() => import("./disright1"));
 function Discovery(props) {
 
     // let [showw, changeshow] = useState(false);
@@ -37,16 +37,18 @@ function Discovery(props) {
     const bbb = (a, b) => {
         // console.log(a, b)
         if (a.title === "热门搜索") {
-            props.history.push('/discovery/home')
+            props.history.push('/discovery/home/home')
         } else {
-            props.history.push('/discovery/other' + a.title)
+            props.history.push('/discovery/home/other/' + a.title)
         }
 
     }
 
 
     let tiaozhuan = () => {
-        props.history.push('/goods/')
+        props.history.push('/discovery/search/index/' + "id")
+        // console.log(props)
+        // props.match.path = "/search"
     }
 
     return (
@@ -102,15 +104,12 @@ function Discovery(props) {
                     </Tabs>
 
                 </div>
-
-
-
                 <div style={{ display: "inline-block", width: "76vw", float: "right" }}>
                     {/* <Suspense fallback={<div>loading...</div>}> */}
                     <Switch>
-                        <Route path="/discovery/home" component={disright}></Route>
-                        <Route path="/discovery/other:name" component={disright1}></Route>
-                        <Redirect from="/discovery" to="/discovery/home" exact />
+                        <Route path="/discovery/home/home" component={Disright}></Route>
+                        <Route path="/discovery/home/other/:name" component={Disright1}></Route>
+                        <Redirect from="/discovery/home" to="/discovery/home/home" exact />
                     </Switch>
                     {/* </Suspense> */}
                 </div>

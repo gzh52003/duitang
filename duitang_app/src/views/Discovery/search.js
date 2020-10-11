@@ -1,14 +1,21 @@
 import React from 'react';
-import request from "../../utils/request"
+import { Route, Switch, Redirect } from 'react-router-dom'
+
+import Search1 from "./search1";
+import Search2 from "./search2";
+
 function Login() {
 
-    request.get("/list/by_search", {
-        kw: "动漫"
-    }).then(res => {
-        console.log(res)
-    })
+
     return (
-        <div>Logi1111n</div>
+        <div>
+            <Switch>
+                <Route path='/discovery/search/index/:id' component={Search1} />
+                {/* <Route path='/discovery/search/list/:id' component={Search2} /> */}
+                <Redirect from="/discovery/search" to="/discovery/search/index" exact></Redirect>
+                {/* <Route path='/discovery/list/:id' component={index} /> */}
+            </Switch>
+        </div>
     )
 }
 export default Login

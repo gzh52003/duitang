@@ -29,18 +29,34 @@ function Login(props) {
     },[])
     useEffect(() => {
 
-        // num = !num;
-        // console.log(num)
-        // if (num) {
-        //     // console.log("Asd")
-        // }
-        // const fff = () => {
+    const handleClick = () => {
+        let aa = document.querySelector(".checking input").checked;
+        // console.log(aa)
+        if (aa) {
+            props.history.push("/mine/login2")
+        } else {
+            Toast.info('请先勾选同意用户协议和隐私政策', 1.5);
+        }
 
+    }
+    // useEffect(() => {
+
+    // num = !num;
+    // console.log(num)
+    // if (num) {
+    //     // console.log("Asd")
+    // }
+    // const fff = () => {
 
 
         // }
     },[])
 
+    // }
+    // })
+    const tuichu = () => {
+        console.log("asdsd")
+    }
 
     // setAA(true)
 

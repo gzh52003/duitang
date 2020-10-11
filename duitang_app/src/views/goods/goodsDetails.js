@@ -22,9 +22,10 @@ class goodsDetails extends React.PureComponent {
             ...this.state,
             money: parseInt((Math.random() * 20) + 1)
         })
+        console.log(this.props.location.search,'3333');
     }
     componentWillUnmount() {
-        this.props.dispatch({ type: 'tabbar', show: true })
+        this.props.dispatch({ type: 'tabbar', show: false })
     }
     render() {
         const { ItemCode, Instro, Price, Cpmc, LinePrice, tag_promo } = this.state.goodsDetailsDese
