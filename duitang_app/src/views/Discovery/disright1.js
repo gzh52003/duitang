@@ -1,12 +1,10 @@
 import React from 'react';
 import request from "../../utils/request"
 function Login(props) {
-
-    // request.get("/list/by_search", {
-    //     kw: "动漫"
-    // }).then(res => {
-    //     console.log(res)
-    // })
+    const tiaozhuang = (ee) => {
+        props.history.push('/discovery/search/index/' + ee.name)
+        // console.log(ee)
+    }
     const xuan = props.match.params.name;
     // console.log(xuan)
 
@@ -2145,24 +2143,25 @@ function Login(props) {
         }
     })
     // console.log(xuan1.datalist)
+
     return (
         <div>
             {
                 // xuan1.forE
 
-                // item.datalist.map(items => {
-                //     return <div>{items.name}</div>
-                //     // items.data.map(itemss => {
-                //     //     return <div>{itemss.name}</div>
-                //     // })
-
-                // })
                 xuan1.datalist.map(item => {
                     return (
 
                         <div>
                             <div style={{ fontSize: "24px", fontWeight: "bold", padding: "14px 0" }}>{item.name}</div>
-                            {item.data.map(items => { return <div style={{ width: "48%", height: "80px", display: "inline-block", marginLeft: "1%" }}><img src={items.path} style={{ width: "100%", height: "100%" }} alt="" /><div style={{ paddingTop: "8px", textAlign: "center" }}>{items.name}</div></div> })}
+                            {item.data.map(items => {
+                                if (item.name === "原创作者") {
+                                    return <div style={{ width: "32%", height: "80px", display: "inline-block", marginLeft: "1%" }} onClick={() => tiaozhuang(items)}><img src={items.path} style={{ width: "100%", height: "100%" }} alt="" /><div style={{ paddingTop: "8px", textAlign: "center" }}>{items.name}</div></div>
+                                } else {
+                                    return <div style={{ width: "48%", height: "80px", display: "inline-block", marginLeft: "1%" }} onClick={() => tiaozhuang(items)}><img src={items.path} style={{ width: "100%", height: "100%" }} alt="" /><div style={{ paddingTop: "8px", textAlign: "center" }}>{items.name}</div></div>
+                                }
+
+                            })}
                         </div>
                     )
 

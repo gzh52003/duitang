@@ -92,9 +92,9 @@ class Goods extends React.Component {
         }, 1000)
         setTimeout(() => {
             this.setState({
-              data: ['AiyWuByWklrrUDlFignR', 'TekJlZRVCjLFexlOCuWn', 'IJOtIlfsYdTyaDTRVrLI'],
+                data: ['AiyWuByWklrrUDlFignR', 'TekJlZRVCjLFexlOCuWn', 'IJOtIlfsYdTyaDTRVrLI'],
             });
-          }, 100);
+        }, 100);
     }
     render() {
         return (
@@ -183,16 +183,16 @@ class Goods extends React.Component {
                                         infinite
                                         beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
                                         afterChange={index => console.log('slide to', index)}
-                                        style={{height:'12vh'}}
+                                        style={{ height: '12vh' }}
                                         dots={false}
                                         autoplay={false}
                                     >
                                         {this.state.data.map(val => (
                                             <>
-                                            <div style={{display:'flex',marginTop:'6px'}}>
-                                                <img style={{width:'30%',height:'10vh',display:'inline-block',marginRight:'10px'}} src="https://c-ssl.duitang.com/uploads/item/202009/25/20200925163316_LKWmj.jpeg" alt=""/>
-                                                <span style={{verticalAlign:'middle',fontSize:'12px',color:'#565656'}}>谁说爱吃月饼是“中老年”喜好？这些月饼，今年中秋一定要吃到</span>
-                                            </div>
+                                                <div style={{ display: 'flex', marginTop: '6px' }}>
+                                                    <img style={{ width: '30%', height: '10vh', display: 'inline-block', marginRight: '10px' }} src="https://c-ssl.duitang.com/uploads/item/202009/25/20200925163316_LKWmj.jpeg" alt="" />
+                                                    <span style={{ verticalAlign: 'middle', fontSize: '12px', color: '#565656' }}>谁说爱吃月饼是“中老年”喜好？这些月饼，今年中秋一定要吃到</span>
+                                                </div>
                                             </>
                                         ))}
                                     </Carousel>
