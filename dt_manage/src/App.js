@@ -65,5 +65,4 @@ class App extends React.PureComponent {
 
 
 App = withRouter(App);
-
 export default App;
