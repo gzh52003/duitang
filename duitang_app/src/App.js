@@ -60,7 +60,7 @@ class App extends React.PureComponent {
     
   }
   componentWillMount(){
-    this.props.dispatch({type:'tabbar',show:false})
+    this.props.dispatch({type:'tabbar',show:true})
     // console.log(this.props.location.pathname,'0000');
     this.setState({
       selectedTab:this.props.location.pathname

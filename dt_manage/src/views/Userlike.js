@@ -58,11 +58,9 @@ const columns = [
 ]
 
 const showQuickJumper = () => {
-    console.log("asd")
 }
 
 const onShowSizeChange = (current, size) => {
-    console.log(current, size)
 }
 
 const showSizeChanger = () => {
@@ -70,7 +68,6 @@ const showSizeChanger = () => {
 }
 
 function Userlike() {
-    // console.log('home.props=', props)
     let [data, setdata] = useState([]);
 
     useEffect(() => {
@@ -89,7 +86,6 @@ function Userlike() {
 
 
     })
-    console.log(data)
 
     return (
 

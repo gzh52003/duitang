@@ -5,10 +5,7 @@ import { Route, Redirect, Switch, withRouter } from 'react-router-dom'
 // import { logout } from './store/actions/user'
 // import { connect } from 'react-redux'
 import './App.css';
-<<<<<<< HEAD
-=======
-
->>>>>>> huang
+import {withStorageClass} from './hoc'
 // import { Row, Col, Button } from 'antd';
 
 const Login = lazy(() => import("./views/Login"));
@@ -33,7 +30,6 @@ class App extends React.PureComponent {
   // 路由跳转
   goto = (path) => {
 
-    console.log(this.props.history, path)
     this.props.history.push(path);
     // this.props.history.push("/login")
   }
@@ -52,7 +48,6 @@ class App extends React.PureComponent {
 
   render() {
     // const { anniu } = this.state;
-    // // console.log(this.props)
     // // const { value, onIncreaseClick } = this.props
     return (
       <div style={{ height: "100vh" }}>
@@ -68,11 +63,6 @@ class App extends React.PureComponent {
   }
 }
 
-<<<<<<< HEAD
 
 App = withRouter(App);
-=======
-App = withRouter(App);
-
->>>>>>> huang
 export default App;

@@ -1,0 +1,105 @@
+
+$vw:1080;
+$vh:2030;
+$b:100;
+.login-close{
+    height:248vh / $vh *$b;
+    svg{
+        margin:44vh/$vh*$b 0 0 64vw/$vw*$b
+    }
+}
+.login-container{
+    padding-left:9.6vw;
+    box-sizing: border-box;
+    
+}
+.login-title{
+    font-size:56vh / $vh * $b;
+    font-weight: 600;
+    line-height: 1;
+    color:#444;
+}
+.login-renzheng{
+    margin-top:22vh / $vh *$b;
+    font-size:36vh / $vh * $b;
+    margin-bottom:152vh / $vh * $b;
+    color:#aeaeae;
+}
+.login-phone{
+    font-size:44vh / $vh * $b;
+    color:#4e4e4e;
+    line-height: 1;
+    margin-bottom:132vh / $vh *$b;
+}
+.login-phone b{
+    margin-right:60vw / $vw *$b;
+    margin-left:3vw / $vw * $b;
+}
+.login-phone-qita{
+    display:inline-block;
+    width:270vw / $vw * $b;
+    height:70vh /$vh*$b;
+    border:1px solid #fb577a;
+    box-sizing: border-box;
+    font-size:32vh / $vh*$b;
+    line-height: 70vh /$vh*$b;
+    color:#df5f78;
+    border-radius: 32vh / $vh*$b;
+    text-align:center;
+    span{
+        vertical-align: top;
+    }
+}
+.login-on-click-login{
+    width:880vw / $vw * $b;
+    height:6.1vh;
+    background-color:#ff595b;
+    border:1px solid #e16364;
+    box-sizing: border-box;
+    border-radius: 58vh / $vh *$b;
+    text-align: center;
+    line-height: 6.1vh;
+    color:#fff;
+    
+}
+.login-password{
+    margin-top:54vh/$vh*$b;
+    margin-bottom:602vh/$vh*$b;
+    text-align:center;
+    font-size: 36vh/$vh*$b;
+    color:#d06464;
+
+}
+.login-other{
+    text-align:center;
+    margin-bottom:82vh / $vh *$b;
+    span{
+        vertical-align: middle;
+        margin: 0 25vw / $vw *$b;
+    }
+    b{
+        width:250vw / $vw * $b;
+        height:1px;
+        display:inline-block;
+        // transform: translateY(-50%);
+        vertical-align: middle;
+        background:#ededed;
+    }
+}
+
+.login-other-box{
+    .login-other-icon{
+        text-align:center;
+        .login-other-icon-item{
+            display:inline-block;
+            text-align: center;
+            margin:0 35vw / $vw *$b;
+            img{
+                width:132vw / $vw *$b;
+            }
+            p{
+                font-size:30vh / $vh *$b;
+            }
+        }
+    }
+}

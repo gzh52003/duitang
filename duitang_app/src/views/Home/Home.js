@@ -1,7 +1,7 @@
 import React from 'react';
-import { Tabs, SearchBar, WingBlank, Carousel, Button } from 'antd-mobile';
-
-
+import { connect } from 'react-redux'
+import { Tabs, SearchBar, WingBlank, Carousel, Button,PullToRefresh } from 'antd-mobile';
+import request from '../../utils/request'
 
 class Home extends React.Component {
     state = {
@@ -22,6 +22,12 @@ class Home extends React.Component {
         weizhi: 27,
         data: ['1', '2', '3'],
         imgHeight: 176,
+        fabiao:[],
+        refreshing: true,
+        isLoading: true,
+        height: document.documentElement.clientHeight,
+        useBodyScroll: false,
+        staticsize:5
     }
     changeTag=(a,idx)=>{
         this.setState({...this.state,hotlistIdx:idx});
@@ -38,13 +44,56 @@ class Home extends React.Component {
     handleClick = () => {
         this.manualFocusInst.focus();
     }
-    componentDidMount() {
+    onRefresh = async () => {
+        this.setState({ refreshing: true, isLoading: true });
+        this.setState({
+            ...this.state,
+            staticsize: this.state.staticsize + 5
+        })
+        const {data} = await request.get('/list/by_search',{page:1,size:this.state.staticsize})
+        console.log(data,2);
+        this.setState({
+            ...this.state,
+            fabiao:data
+        })
+        setTimeout(() => {
+          this.setState({
+            refreshing: false,
+            isLoading: false,
+          });
+        }, 600);
+      };
+      onEndReached = (event) => {
+        // load new data
+        // hasMore: from backend data, indicates whether it is the last page, here is false
+        if (this.state.isLoading && !this.state.hasMore) {
+          return;
+        }
+        console.log('reach end', event);
+        this.setState({ isLoading: true });
+        setTimeout(() => {
+          this.setState({
+            isLoading: false,
+          });
+        }, 1000);
+      };
+    async componentDidMount() {
+        this.props.dispatch({type:'tabbar',show:false})
+        const {data} = await request.get('/list/by_search',{page:1,size:this.state.staticsize})
+        this.setState({
+            ...this.state,
+            fabiao:data
+        })
+        console.log(this.state.fabiao,1);
         setTimeout(() => {
             this.setState({
                 ...this.state,
                 data: ['/img/recomend1.png', '/img/recomend2.png', '/img/recomend3.png'],
             });
         }, 100);
+    }
+    componentWillUnmount(){
+        this.props.dispatch({type:'tabbar',show:true})
     }
     render() {
         return (
@@ -63,7 +112,7 @@ class Home extends React.Component {
                             <Button style={{ background: '#f25555', borderRadius: '25px', color: '#fff', fontSize: '12px', width: '42vw', position: 'fixed', bottom: 0, left: 0, top: 0, right: 0, margin: 'auto' }} onClick={() => { console.log('跳转到关注达人') }}>去关注堆糖达人</Button>
                         </div>
                     </div>
-                    <div style={{ alignItems: 'center', justifyContent: 'center', height: '1500px' }}>
+                    <div style={{ alignItems: 'center', justifyContent: 'center'}} >
                         <div style={{ background: '#fff', padding: '10px 0' }}>
                             <WingBlank style={{ margin: "0 auto", width: '85vw' }}>
                                 <Carousel
@@ -85,7 +134,6 @@ class Home extends React.Component {
                                                 style={{ width: '100%', verticalAlign: 'top' }}
                                                 onLoad={() => {
                                                     window.dispatchEvent(new Event('resize'));
-                                                    // this.setState({ imgHeight: 'auto' });
                                                 }}
                                             />
                                         </a>
@@ -93,30 +141,26 @@ class Home extends React.Component {
                                 </Carousel>
                             </WingBlank>
                         </div>
-                        <div className='dynamic' style={{ marginBottom: '10px', width: '100%', background: '#fff', padding: '2.1vw 4.5vh' }}>
-                            <dl style={{ display: 'flex' }}>
-                                <dt style={{ width: '8vw', marginRight: '10px' }}><img style={{ width: '100%', height: '100%', borderRadius: '8vw' }} src='/img/pin1.jpg' alt='' /></dt>
-                                <dd>
-                                    <h5 className="username">雯雯114</h5>
-                                    <h6 className="hotContent">热门内容</h6>
-                                </dd>
-                            </dl>
-                            <p style={{ color: '#4d4d4d', marginBottom: '6px' }}>鱼鱼气泡水</p>
-                            <div style={{ width: '100%', height: '20vh', background: 'pink' }}></div>
-                            <p style={{ color: '#c4c4c4' }}><span style={{ marginRight: '40px' }}><i style={{ fontSize: '20px' }} className='iconfont icon-dianzan1'></i>33</span><span><i style={{ fontSize: '14px' }} className='iconfont icon-pinglun'></i>2</span><span><i style={{ float: 'right', fontWeight: 'bold' }} className='iconfont icon-gengduo'></i></span></p>
-                        </div>
-                        <div className='dynamic' style={{ background: '#fff', marginBottom: '20px', width: '100%', padding: '2.1vw 4.5vh' }}>
-                            <dl style={{ display: 'flex' }}>
-                                <dt style={{ width: '8vw', marginRight: '10px' }}><img style={{ width: '100%', height: '100%', borderRadius: '8vw' }} src='/img/pin1.jpg' alt='' /></dt>
-                                <dd>
-                                    <h5 className="username">雯雯114</h5>
-                                    <h6 className="hotContent">热门内容</h6>
-                                </dd>
-                            </dl>
-                            <p style={{ color: '#4d4d4d', marginBottom: '6px' }}>鱼鱼气泡水</p>
-                            <div style={{ width: '100%', height: '20vh', background: 'pink' }}></div>
-                            <p style={{ color: '#c4c4c4' }}><span style={{ marginRight: '40px' }}><i style={{ fontSize: '20px' }} className='iconfont icon-dianzan1'></i>33</span><span><i style={{ fontSize: '14px' }} className='iconfont icon-pinglun'></i>2</span><span><i style={{ float: 'right', fontWeight: 'bold' }} className='iconfont icon-gengduo'></i></span></p>
-                        </div>
+                        <PullToRefresh refreshing={this.state.refreshing} onRefresh={this.onRefresh} direction='up'>
+                            {
+                                this.state.fabiao.map(item=><div className='dynamic' style={{ background: '#fff', marginBottom: '12px', width: '100%', padding: '2.1vw 2.5vh' }}>
+                                <dl style={{ display: 'flex' }}>
+                                    <dt style={{ width: '8vw', marginRight: '10px' }}><img style={{ width: '100%', height: '100%', borderRadius: '8vw',height:' 30px' }} src={'http://120.24.63.27:2006/'+item.sender[0].avatar} alt='' /></dt>
+                                    <dd>
+                                        <h5 className="username">{item.sender[0].username}</h5>
+                                        <h6 className="hotContent">热门内容</h6>
+                                    </dd>
+                                </dl>
+                                <p style={{ color: '#4d4d4d', marginBottom: '6px' }}>{item.msg}</p>
+                                <div style={{ width: '100%', height: '20vh' }}>
+                                    <img src={'http://120.24.63.27:2006/'+item.photo.path}  alt='' style={{width:'26vw',height:'19vh'}}/>
+                                </div>
+                                <p style={{ color: '#c4c4c4' }}><span style={{ marginRight: '40px' }}><i style={{ fontSize: '20px' }} className='iconfont icon-dianzan1'></i>{item.favorite_count}</span><span><i style={{ fontSize: '14px' }} className='iconfont icon-pinglun'></i>{item.reply_count}</span><span><i style={{ float: 'right', fontWeight: 'bold' }} className='iconfont icon-gengduo'></i></span></p>
+                            </div>)
+                                
+                            }
+                        </PullToRefresh>
+                        
                     </div>
                     <div className='hotlist' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center',padding:'0 20px', backgroundColor: '#fff' }}>
                         <Tabs tabs={this.state.hotlist}
@@ -189,4 +233,10 @@ class Home extends React.Component {
     }
 
 }
+const mapStateToProps = function(state){
+    return {
+      hidden: state.hidden,
+    }
+}
+Home = connect(mapStateToProps)(Home)
 export default Home

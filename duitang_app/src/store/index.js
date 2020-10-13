@@ -1,7 +1,7 @@
 import {createStore} from 'redux';
 
 const initState = {
-    hidden:false,
+    hidden:true,
 }
 
 const reducer = function(state=initState,action){

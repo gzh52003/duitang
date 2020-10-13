@@ -14,7 +14,6 @@ class Login extends React.PureComponent {
     // 验证码
     yanzhengma = () => {
         request.get("/admin/vscode").then((res) => {
-            console.log(res)
             if (res.msg === "success") {
                 this.setState({
                     image: res.data
@@ -41,7 +40,6 @@ class Login extends React.PureComponent {
 
         const onFinish = (values) => {
             let $this = this;
-            console.log(values)
             if (values.password.length > 5 && values.username.length >= 2) {
                 let pass = sha256(values.password).toString();
 
@@ -53,8 +51,8 @@ class Login extends React.PureComponent {
                     }).then((res) => {
                         if (res.status === 200) {
                             let obj = { authority: res.data.authority, username: res.data.username, authorzation: res.data.authorzation }
-                            $this.props.history.push({ pathname: '/public', state: { name: values.username } })
                             localStorage.setItem("username", JSON.stringify(obj))
+                            $this.props.history.push({ pathname: '/public', state: { name: values.username } })
                         } else {
                             message.error('账号或密码错误,请重试！')
                         }
@@ -72,22 +70,23 @@ class Login extends React.PureComponent {
             <Form
                 {...layout}
                 name="basic"
-                initialValues={{ remember: false }}
+                initialValues={{ remember: false, username: '雪琳1号', password: '123456' }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
-                style={{ margin: "0 auto", width: "80vw", padding: "14% 0 0 0 " }}
+                style={{ margin: "0 auto", width: "50vw", padding: "14% 0 0 0 " }}
             >
                 <Form.Item
                     label="用户名"
                     name="username"
 
                     rules={[{ required: true, message: 'Please input your username!' }]}
+
                 >
                     <Input allowClear maxLength={12} />
                 </Form.Item>
 
                 <Form.Item
-                    label="密码"
+                    label="密&nbsp;&nbsp;&nbsp;&nbsp;码"
                     name="password"
                     rules={[{ required: true, message: 'Please input your password!' }]}
                 >
